@@ -41,6 +41,32 @@ soup = bs.BeautifulSoup(sauce, 'lxml')
 path = '/home/jacques/Projects/hdscrape/'
 filename = 'demo.html'
 
+# load unordered list of products in grid variable
+grid = soup.body.section.article.find("ul", {"role": "tabpanel"})
+#print (grid)
+# find all porducts
+products = grid.find_all("h2")
+product_details = []
+hd_results = []
+for item in products:
+	product_details.append(item.a)
+for item_tag in product_details:
+	entry = {'brand': item_tag['data-brand'], 'id': item_tag['data-id'], 
+		'name': item_tag['data-name'], 'price': item_tag['data-price'], 
+		'link': item_tag['href'], }
+	hd_results.append(entry)
+
+counter = 1
+for res in hd_results:
+	print("entry number " + str(counter) + ": ")
+
+	for key in res:
+		print (key + " - " + res[key])
+	print ("\n")
+	counter += 1
+
 f = open(path + filename, 'w')
 f.write(str(soup))
 print(f)
+
+
