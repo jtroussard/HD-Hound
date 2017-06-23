@@ -83,18 +83,18 @@ def insert_doc(dt, brand, fid, name, price, link, size):
 	sequence = collection.count() + 1
 
 	if price:
-            p_value = float(sub(r'[^\d.]', '', price))
-	    s_factr = 0
-	    if 'TB' in size:
-	        s_factr = 1000
-	    else:
-	        s_factr = 1
-	    s_value = int(sub(r'\D', '', size))
-	    gbpd = (s_value * s_factr)/p_value
-	    print ("gb per dollar:" + str(gbpd))
+		p_value = float(sub(r'[^\d.]', '', price))
+		s_factr = 0
+		if 'TB' in size:
+			s_factr = 1000
+		else:
+			s_factr = 1
+		s_value = int(sub(r'\D', '', size))
+		gbpd = (s_value * s_factr)/p_value
+		print ("gb per dollar:" + str(gbpd))
 	else:
-	   price = "Unknown"
-	   gbpd = "Unknown"
+		price = "Unknown"
+		gbpd = "Unknown"
 
 	if collection.find_one({"foreign_id_number": fid}):
 		print("if find one fid PASSED below find results")
