@@ -3,6 +3,12 @@ Adam-p. "Adam-p/markdown-here." GitHub. N.p., n.d. Web. 22 June 2017. <https://g
 "Append vs. Extend." Python - Append vs. Extend - Stack Overflow. N.p., n.d. Web. 22 June 2017. <https://stackoverflow.com/questions/252703/append-vs-extend>.
 "Beautiful Soup Documentation¶." Beautiful Soup Documentation — Beautiful Soup 4.4.0 Documentation. N.p., n.d. Web. 22 June 2017. <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>.
 "Exercise 46: A Project Skeleton." Learn Python the Hard Way. N.p., n.d. Web. 22 June 2017.
+"5. Data Structures¶." 5. Data Structures — Python 3.6.2rc1 Documentation. N.p., n.d. Web. 22 June 2017. <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>.
 "Good Way to Append to a String." Python - Good Way to Append to a String - Stack Overflow. N.p., n.d. Web. 22 June 2017.
+"How to Print a Dictionary Line by Line in Python?" Printing - How to Print a Dictionary Line by Line in Python? - Stack Overflow. N.p., n.d. Web. 22 June 2017. <https://stackoverflow.com/questions/15785719/how-to-print-a-dictionary-line-by-line-in-python>.
+"HowTo: Use Grep Command In Linux / UNIX – Examples." NixCraft. N.p., 03 May 2017. Web. 23 June 2017. <https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/>.
+"Install MongoDB Community Edition on Ubuntu¶." Install MongoDB Community Edition on Ubuntu — MongoDB Manual 3.4. N.p., n.d. Web. 23 June 2017. <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/>.
 (TechnicalUser), Leegold2, Feherke (Programmer), and IPGuru (TechnicalUser). "Trying to Write Beautifulsoup Result to a File." Tek-Tips Information Technology Professional Forums. N.p., 13 Nov. 2011. Web. 22 June 2017.
+"Thread: How to Check System Specs?" Ubuntu Forums RSS. N.p., n.d. Web. 23 June 2017. <https://ubuntuforums.org/showthread.php?t=1478687>.
 Turkel, William J., and Adam Crymble. "Creating and Viewing HTML Files with Python." Programming Historian. N.p., 17 July 2012. Web. 22 June 2017.
+"Ubuntu — Show Version Number (Command Line and Unity)." HostingAdvice.com. N.p., 11 May 2016. Web. 23 June 2017. <http://www.hostingadvice.com/how-to/ubuntu-show-version/>.
