@@ -1,2 +1,4 @@
 # ignore demo file used during development
 demo.*
+*.pyc
+__pycache__/
