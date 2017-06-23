@@ -116,25 +116,26 @@ def loadItems(number_of_pages):
 		t_count = 0
 		# parce products list into dictionaries and load into hd_results list
 		for item_tag in product_details:
+			now = datetime.datetime.now().isoformat(' ')
 			t_count += 1
-			entry = 
-				{
-					'brand': item_tag['data-brand'],
-					'id': item_tag['data-id'],
-					'name': item_tag['data-name'],
-					'price': item_tag['data-price'],
-					'link': item_tag['href']
-				}
+			entry = {
+				'brand': item_tag['data-brand'],
+				'id': item_tag['data-id'],
+				'name': item_tag['data-name'],
+				'price': item_tag['data-price'],
+				'link': item_tag['href']
+			}
 			# for now i'm just parsing the name for the hardrive size
 			# but in newer version I want to dig deeper and pull the data from
 			# the actual item page.
 			item_storage_size = ""
-			p = re.search(re.compile([0-9]+((TB)|(GB))), entry['name'])
+			p = re.search(re.compile('[0-9]+((TB)|(GB))'), entry["name"])
 			if p.group():
 				item_storage_size = p.group(0)
 			else:
 				item_storage_size = "Unknown"
-			entry['hdSize': item_storage_size]
+			entry['hdSize'] = item_storage_size
+			entry['dateScrapped'] = now
 
 			hd_results.append(entry)
 		print ("  " + str(t_count) + "tag(s) processed")

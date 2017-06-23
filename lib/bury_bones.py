@@ -12,7 +12,8 @@ db actions --- might do a separate module for this)
 
 import pymongo
 import datetime
-from lib.config import *
+from re import sub
+from decimal import Decimal
 from pymongo import MongoClient
 
 __author__     = "Jacques Troussard"
@@ -47,7 +48,8 @@ def get_collection(db_name, col_name):
 	print("===MONGO-GETCOLLECTION===")
 	try:
 		conn = ConnectToMongo();
-		collection = conn.db_name.col_name
+		db = conn.price_hound
+		collection = db.hard_drives
 		results = collection.find()
 		print("\tresult test:{}".format(results))
 		return (results)
@@ -56,35 +58,16 @@ def get_collection(db_name, col_name):
 		print(e)
 		print ("Error getting collection")
 
-		
-def login_user(rqst_user, rqst_password):
-	print("===MONGO-LOGIN===")
-	print("\targs= {}, {}".format(rqst_user, rqst_password))
-	conn = ConnectToMongo();
-	if conn == None:
-		print ('Connection Error: Login Aborted')
-		return None
-	
-	db = conn.insurance
-	collection = db.users
-
-	login_result = collection.find_one({ 'username': rqst_user, 'password':
-			rqst_password })
-	print("\tlogin results: {}".format(login_result))
-	return (login_result)
-
-
-def insert_doc(rq_description, rq_qty, rq_owner, rq_room, rq_notes):
+def insert_doc(dt, brand, fid, name, price, link, size):
 	print("===MONGO-INSERTDOC===")
-	print
-		("\targs= {}, {}, {}, {}, {}".format
-			(
-				scrape_date,
-				item_brand,
-				item_id,
-				item_name,
-				item_price,
-				item_link
+	print("\targs= {}, {}, {}, {}, {}, {}, {}, {}".format(
+			dt,
+			brand,
+			fid,
+			name,
+			price,
+			link,
+			size
 			)
 		)
 	conn = ConnectToMongo();
@@ -92,205 +75,47 @@ def insert_doc(rq_description, rq_qty, rq_owner, rq_room, rq_notes):
 		print("Connection Error: Insert Doc Aborted")
 		return None
 	
-	db = conn.insurance
-	collection = db.master
+	db = conn.price_hound
+	collection = db.hard_drives
 	original_count = collection.count()
 	sequence = collection.count() + 1
 
-	collection.insert_one(
-		{
-			"seq" : sequence,
-			"orig-desc" : rq_description,
-			"qty" : rq_qty,
-			"owner" : rq_owner,
-			"room" : rq_room,
-			"original" : "FALSE",
-			"modified" : "FALSE",
-			"replaced" : "FALSE",
-			"reimbursed" : "FALSE",
-			"notes" : rq_notes,
-			"approved" : "FALSE"
-		}
-	)
-	print(collection.find({"seq":389}))
+	p_value = Decimal(sub(r'[^\d.]', '', price))
+	d_fact = 0
+	if 'TB' in size:
+		s_factr = 1
+	else:
+		s_factr = 1000
+	s_value = sub(r'\D', '', size)
+	gbpd = (s_value * s_factr)/p_value
+	print ("gb per dollar:" + str(gbpd))
+
+	if collection.find_one({"foreign_id_number": fid}):
+		print("if find one fid PASSED below find results")
+		print(collection.find_one({"foreign_id_number": fid}))
+
+	else:
+		print("if find one fid FAILED below find results")
+		print(collection.find_one({"foreign_id_number": fid}))
+
+		collection.insert_one(
+			{
+				"seq" : sequence,
+				"description" : name,
+				"last_scrape" : dt,
+				"brand" : rq_owner,
+				"foreign_id_number" : fid,
+				"price" : price,
+				"link" : link,
+				"hd_size" : size,
+				"price_per_GB" : gbpd
+			}
+		)
+	
 	if (original_count < collection.count()):
 		print("\tDoc insert SUCCESSFUL")
 	else:
 		print("\tDoc insert UNSUCCESSFUL")
 
+	print(collection.find({"seq": sequence}))
 
-def get_unapproved():
-	print("===MONGO-GETUNAPPROVED===")
-	try:
-		conn = ConnectToMongo();
-		db = conn.insurance
-		collection = db.master
-		results = collection.find({"approved" : "FALSE"})
-		print("\tresult test:{}".format(results))
-		return (results)
-	except Exception as e:
-		print(type(e))
-		print(e)
-		print ("Error getting unapproved collection")
-
-
-def rtn_doc(r_seq):
-	print("===MONGO-GETACTIVEDOC===")
-	print("\targs= {}".format(r_seq))
-
-	conn = ConnectToMongo();
-	if conn == None:
-		print("Connection Error: Insert Doc Aborted")
-		return None
-
-	db = conn.insurance
-	collection = db.master
-	active_doc = collection.find_one( { 'seq' : int(r_seq) } ) 
-	print(active_doc)
-
-	if not active_doc:
-		print("Sequence number is not in database")
-	
-	return active_doc
-
-
-#history is a list of objects
-
-
-def mod_doc(r_seq, r_repl_desc, r_orig_desc, r_qty, r_unit_price, r_est_amt, r_tax,
-		r_repl_cost, r_depr, r_acv, r_owner, r_room, r_original, r_modified,
-		r_replaced, r_reimbursed, r_invoice, r_notes):
-	
-	print("===MONGO-MODDOC===")
-	print("\targs= {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}".format(r_repl_desc, r_orig_desc, r_qty, r_unit_price, r_est_amt, r_tax, r_repl_cost, r_depr, r_acv, r_owner, r_original, r_modified,	r_replaced, r_reimbursed, r_invoice, r_notes, r_room))
-	conn = ConnectToMongo();
-	if conn == None:
-		print("Connection Error: Insert Doc Aborted")
-		return None
-
-	db = conn.insurance
-	collection = db.master
-	original_doc = collection.find_one( {"seq": int(r_seq) } )
-	history_entry = {}
-	record_entry = ""
-
-	for key in original_doc:
-		print(key)
-
-	# log string building & recording: if the document attribute is different 
-	# from the original document, modify the document entry and append the 
-	# record entry string otherwise check if the document attribute entry
-	# needs to be added to the document. If it does, modify the document and
-	# appened this action to the record entry string. If the neither of these
-	# conditions are met this means that the document attribute has not
-	# been modified and the program should move on to the next document
-	# attribute.
-	if 'repl-desc' in original_doc and r_repl_desc != original_doc['repl-desc']:
-		record_entry += "replacement desc: " + original_doc['repl-desc'] + " => " + r_repl_desc + "\n"
-	elif 'repl-desc' not in original_doc:
-		original_doc = { 'repl-desc' : r_repl_desc }
-		record_entry += "replacement desc: EMPTY => " + r_repl_desc + "\n"
-
-	if 'orig-desc' in original_doc and r_orig_desc != original_doc['orig-desc']:
-		record_entry += "original desc: " + original_doc['orig-desc'] + " => " + r_orig_desc + "\n"
-	elif 'orig-desc' not in original_doc:
-		original_doc = { 'orig-desc' : r_orig_desc }
-		record_entry += "original desc: EMPTY => " + r_orig_desc + "\n"
-
-	if 'qty' in original_doc and r_qty != original_doc['qty']:
-		record_entry += "qty: " + original_doc['qty'] + " => " + r_qty + "\n"
-	elif 'qty' not in original_doc:
-		original_doc = { 'qty' : r_qty }
-		record_entry += "qty: EMPTY => " + r_qty + "\n"
-
-	if 'unit-price' in original_doc and r_unit_price != original_doc['unit-price']:
-		record_entry += "unit price: " + original_doc['unit-price'] + " => " + r_unit_price + "\n"
-	elif 'unit-price' not in original_doc:
-		original_doc = { 'unit-price' : r_unit_price }
-		record_entry += "unit price: EMPTY => " + r_unit_price + "\n"
-
-	if 'est-amt' in original_doc and r_est_amt != original_doc['est-amt']:
-		record_entry += "estimate amount: " + original_doc['est-amt'] + " => " + r_est_amt + "\n"
-	elif 'est-amt' not in original_doc:
-		original_doc = { 'est-amt' : r_est_amt }
-		record_entry += "estimate amount: EMPTY => " + r_est_amt + "\n"
-	
-	if 'tax' in original_doc and r_tax != original_doc['tax']:
-		record_entry += "additional: " + original_doc['tax'] + " => " + r_tax + "\n"
-	elif 'tax' not in original_doc:
-		original_doc = { 'tax' : r_tax }
-		record_entry += "additional: EMPTY => " + r_tax + "\n"
-
-	if 'repl-cost' in original_doc and r_repl_cost != original_doc['repl-cost']:
-		record_entry += "replacement cost: " + original_doc['repl-cost'] + " => " + r_repl_cost + "\n"
-	elif 'repl-cost' not in original_doc:
-		original_doc = { 'repl-cost' : r_repl_cost }
-		record_entry += "replacement cost: EMPTY => " + r_repl_cost + "\n"
-	
-	if 'depr' in original_doc and r_depr != original_doc['depr']:
-		record_entry += "depreciation: " + original_doc['depr'] + " => " + r_depr + "\n"
-	elif 'depr' not in original_doc:
-		original_doc = { 'depr' : r_depr }
-		record_entry += "depreciation: EMPTY => " + r_depr + "\n"
-
-	if 'acv' in original_doc and r_acv != original_doc['acv']:
-		record_entry += "actual value" + original_doc['actual value'] + " => " + r_acv + "\n"
-	elif 'acv' not in original_doc:
-		original_doc = { 'acv' : r_acv }
-		record_entry += "actual value: EMPTY  => " + r_acv + "\n"
-
-	if 'replaced' in original_doc and r_replaced != original_doc['replaced']:
-		record_entry += "replaced: " + original_doc['replaced'] + " => " + r_replaced + "\n"
-	elif 'replaced' not in original_doc:
-		original_doc = { 'replaced' : r_replaced }
-		record_entry += "replaced: EMPTY => " + r_replaced + "\n"
-
-	if 'reimbursed' in original_doc and r_reimbursed != original_doc['reimbursed']:
-		record_entry += "reimbursed: " + original_doc['reimbursed'] + " => " + r_reimbursed + "\n"
-	elif 'reimbursed' not in original_doc:
-		original_doc = { 'reimbursed' : r_reimbursed }
-		record_entry += "reimbursed: EMPTY => " + r_reimbursed + "\n"
-
-	if 'invoice' in original_doc and r_invoice != original_doc['invoice']:
-		record_entry += "invoice: " + original_doc['invoice'] + " => " + r_invoice + "\n"
-	elif 'invoice' not in original_doc:
-		original_doc = { 'invoice' : r_invoice }
-		record_entry += "invoice: EMPTY => " + r_invoice + "\n"
-
-	if 'notes' in original_doc and r_notes != original_doc['notes']:
-		record_entry += "notes: " + original_doc['notes'] + " => " + r_notes + "\n"
-	elif 'notes' not in original_doc:
-		original_doc = { 'notes' : r_notes }
-		record_entry += "notes: EMPTY => " + r_notes + "\n"
-
-	# load date and time into time variable. load date and record entry string
-	# built in previous if else suite, into dict to be appended to document's
-	# history list attribute
-	now = datetime.datetime.now()
-	history_entry = { "date" : now, "record" : record_entry, }
-
-	# find the appropriate document and update as pre the form variables
-	# including the history entry
-	collection.find_one_and_update(	{"seq"  :int(r_seq)},
-									{"$set" : {
-										"repl-desc" : r_repl_desc,
-										"orig-desc" : r_orig_desc,
-										"qty"       : r_qty,
-										"unit-price": r_unit_price,
-										"est-amt"   : r_est_amt,
-										"tax"       : r_tax,
-										"repl-cost" : r_repl_cost,
-										"depr"      : r_depr,
-										"acv"       : r_acv,
-										"owner"     : r_owner,
-										"room"      : r_room,
-										"original"  : r_original,
-										"modified"  : r_modified,
-										"replaced"  : r_replaced,
-										"reimbursed": r_reimbursed,
-										"invoice"   : r_invoice,
-										"notes"     : r_notes
-										},
-									"$addToSet" : { "history" : history_entry }
-									})
-	print(collection.find_one( { "seq" : int(r_seq) } ))
