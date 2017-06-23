@@ -12,6 +12,8 @@ db actions --- might do a separate module for this)
 
 import pymongo
 import datetime
+import bson
+from bson.decimal128 import Decimal128 as d128
 from re import sub
 from decimal import Decimal
 from pymongo import MongoClient
@@ -60,7 +62,7 @@ def get_collection(db_name, col_name):
 
 def insert_doc(dt, brand, fid, name, price, link, size):
 	print("===MONGO-INSERTDOC===")
-	print("\targs= {}, {}, {}, {}, {}, {}, {}, {}".format(
+	print("\targs= {}, {}, {}, {}, {}, {}, {}".format(
 			dt,
 			brand,
 			fid,
@@ -80,15 +82,19 @@ def insert_doc(dt, brand, fid, name, price, link, size):
 	original_count = collection.count()
 	sequence = collection.count() + 1
 
-	p_value = Decimal(sub(r'[^\d.]', '', price))
-	d_fact = 0
-	if 'TB' in size:
-		s_factr = 1
+	if price:
+            p_value = float(sub(r'[^\d.]', '', price))
+	    s_factr = 0
+	    if 'TB' in size:
+	        s_factr = 1000
+	    else:
+	        s_factr = 1
+	    s_value = int(sub(r'\D', '', size))
+	    gbpd = (s_value * s_factr)/p_value
+	    print ("gb per dollar:" + str(gbpd))
 	else:
-		s_factr = 1000
-	s_value = sub(r'\D', '', size)
-	gbpd = (s_value * s_factr)/p_value
-	print ("gb per dollar:" + str(gbpd))
+	   price = "Unknown"
+	   gbpd = "Unknown"
 
 	if collection.find_one({"foreign_id_number": fid}):
 		print("if find one fid PASSED below find results")
@@ -103,7 +109,7 @@ def insert_doc(dt, brand, fid, name, price, link, size):
 				"seq" : sequence,
 				"description" : name,
 				"last_scrape" : dt,
-				"brand" : rq_owner,
+				"brand" : brand,
 				"foreign_id_number" : fid,
 				"price" : price,
 				"link" : link,
