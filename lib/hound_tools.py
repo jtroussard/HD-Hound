@@ -129,7 +129,7 @@ def loadItems(number_of_pages):
 			# but in newer version I want to dig deeper and pull the data from
 			# the actual item page.
 			item_storage_size = ""
-			p = re.search(re.compile('[0-9]+((TB)|(GB))'), entry["name"])
+			p = re.search(re.compile('[0-9]+\.*[0-9]+((TB)|(GB))'), entry["name"])
 			if p.group():
 				item_storage_size = p.group(0)
 			else:
