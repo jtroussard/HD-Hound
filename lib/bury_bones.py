@@ -11,9 +11,7 @@ db actions --- might do a separate module for this)
 """
 
 import pymongo
-import datetime
-import bson
-from bson.decimal128 import Decimal128 as d128
+import pprint
 from re import sub
 from decimal import Decimal
 from pymongo import MongoClient
@@ -26,6 +24,9 @@ __maintainer__ = "Jacques Troussard"
 __email__      = "tekksparrows@gmail.com"
 __status__     = "Development"
 
+# for now I am hard coding the db and collection, up to this point there is 
+# very little functionality in this scrapper. once this first iteration is done
+# this will be modified to allow for more control
 def ConnectToMongo():
 	try:
 		client = MongoClient()
@@ -36,52 +37,15 @@ def ConnectToMongo():
 		print ("Error connecting with MongoClient")
 		return None
 
-def get_db(client, database):
-	try:
-		db = client.database
-		return (db)
-	except Exception as e:
-		print(type(e))
-		print(e)
-		print ("Error getting database")
-		return None
-
-def get_collection(db_name, col_name):
-	print("===MONGO-GETCOLLECTION===")
-	try:
-		conn = ConnectToMongo();
-		db = conn.price_hound
-		collection = db.hard_drives
-		results = collection.find()
-		print("\tresult test:{}".format(results))
-		return (results)
-	except Exception as e:
-		print(type(e))
-		print(e)
-		print ("Error getting collection")
-
-def insert_doc(dt, brand, fid, name, price, link, size):
-	print("===MONGO-INSERTDOC===")
-	print("\targs= {}, {}, {}, {}, {}, {}, {}".format(
-			dt,
-			brand,
-			fid,
-			name,
-			price,
-			link,
-			size
-			)
-		)
-	conn = ConnectToMongo();
-	if conn == None:
-		print("Connection Error: Insert Doc Aborted")
-		return None
-	
-	db = conn.price_hound
-	collection = db.hard_drives
-	original_count = collection.count()
-	sequence = collection.count() + 1
-
+# If price exists, convert price and size data into a usable float and int
+# determine size factor (TB/GB), and perform dimensional anaylsis, results
+# gbpd, in Gigabytes per unit ($USD). Missing price info expressed with the
+# string 'Unknown'. Since using mongodb I dont think that will be a major
+# but I'm already running into some annoyances cause by this mixing of types
+# when testing/queryuing the db in mongoshell. May change this to a negative
+# number or something if a price is not found.
+def calc_gpmu(price, size):
+	gpmu = 0.0
 	if price:
 		p_value = float(sub(r'[^\d.]', '', price))
 		s_factr = 0
@@ -90,38 +54,68 @@ def insert_doc(dt, brand, fid, name, price, link, size):
 		else:
 			s_factr = 1
 		s_value = int(sub(r'\D', '', size))
-		gbpd = (s_value * s_factr)/p_value
-		print ("gb per dollar:" + str(gbpd))
+		gpmu = (s_value * s_factr)/p_value
+		# print ("gb per dollar:" + str(gpmu))
 	else:
-		price = "Unknown"
-		gbpd = "Unknown"
+		price = -1
+		gpmu = -1
+	return gpmu
 
-	if collection.find_one({"foreign_id_number": fid}):
-		print("if find one fid PASSED below find results")
-		print(collection.find_one({"foreign_id_number": fid}))
+def insert_doc(dt, brand, fid, name, price, link, size):
+	print('===MONGO-INSERTDOC===')
+	conn = ConnectToMongo()
+	if conn == None:
+		print("Connection Error: Insert Doc Aborted")
+		return
+	
+	# create collection var
+	db = conn.price_hound
+	collection = db.hard_drives
 
+	# create collection counter vars for seq number and to use to check if
+	# insert was successful
+	original_count = collection.count()
+	sequence = collection.count() + 1
+	
+	# calculate gigabyte per monetary unit and set up pretty printer (printer
+	# was exclusivly for debugging during development... remove?)
+	gpmu = calc_gpmu(price, size)
+	pp = pprint.PrettyPrinter(indent=4)
+
+	# Find out if document already exits by searching for microcenter item id
+	# search for updates in item and make necessary changes. If document is new then insert new doc to db
+	if collection.find_one( { 'foreign_id_number': fid, 'brand': brand, 'link': link } ):
+		doc = collection.find_one( { 'foreign_id_number': fid, 'brand': brand, 'link': link } )
+		# debug check doc before changes
+		# pp.pprint(doc)
+		# update last scrape value and check for price difference
+		if doc['last_scrape'] != dt:
+			collection.update_one( { '_id': doc['_id'] }, { '$set': { 'last_scrape': dt } } )
+		if doc['price'] != price:
+			print('item match found, updating record . . .')
+			# create new history entry and perform update
+			he_entry = {'he-date': doc['last_scrape'], 'he-price': doc['price'], 'he-gpmu': doc['GB_per_mu'] }
+			collection.update_one( { '_id': doc['_id'] }, { '$set': { 'price': price, 'GB_per_mu': gpmu }, '$push': { 'history': he_entry } })
 	else:
-		print("if find one fid FAILED below find results")
-		print(collection.find_one({"foreign_id_number": fid}))
-
 		collection.insert_one(
 			{
-				"seq" : sequence,
-				"description" : name,
-				"last_scrape" : dt,
-				"brand" : brand,
-				"foreign_id_number" : fid,
-				"price" : price,
-				"link" : link,
-				"hd_size" : size,
-				"price_per_GB" : gbpd
+				'seq' : sequence,
+				'description' : name,
+				'last_scrape' : dt,
+				'brand' : brand,
+				'foreign_id_number' : fid,
+				'price' : price,
+				'link' : link,
+				'hd_size' : size,
+				'GB_per_mu' : gpmu,
+				'History' : [] # history is list to facilitate/be compatible w/ $push command
 			}
 		)
-	
-	if (original_count < collection.count()):
-		print("\tDoc insert SUCCESSFUL")
-	else:
-		print("\tDoc insert UNSUCCESSFUL")
-
-	print(collection.find({"seq": sequence}))
-
+		# logic test to confirm document was added to collection
+		if (original_count < collection.count()):
+			print("\tDoc insert SUCCESSFUL")
+		else:
+			print("\tDoc insert UNSUCCESSFUL")
+	# debug check doc for changes, reload doc variable to make comparision via console
+	# doc = collection.find_one( { 'foreign_id_number': fid, 'brand': brand, 'link': link } )
+	# pp.pprint(doc)
