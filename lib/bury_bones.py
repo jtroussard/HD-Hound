@@ -12,7 +12,7 @@ db actions --- might do a separate module for this)
 
 import pymongo
 import pprint
-from re import sub
+import re
 from decimal import Decimal
 from pymongo import MongoClient
 
