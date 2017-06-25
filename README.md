@@ -19,9 +19,8 @@ A web scraper written to gather hard drive pricing data
     1. fix bugs found during first tests
   * Sun Jun 25 6:02PM:
     1. completely recoded database functions
-        * jhg
-      * hard coded db access
-      * separated price per gb function
-      * reworked insert to include document updating
-      * created mech. for price history
+        * hard coded db access
+        * separated price per gb function
+        * reworked insert to include document updating
+        * created mech. for price history
     2. tested database functions
