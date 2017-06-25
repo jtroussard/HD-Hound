@@ -1,14 +1,29 @@
 Works Cited
+"8.1. Datetime — Basic Date and Time Types¶." 8.1. Datetime - Basic Date and Time Types — Python 2.7.13 Documentation. N.p., n.d. Web. 23 June 2017. <https://docs.python.org/2/library/datetime.html>.
+"8.18. Pprint — Data Pretty Printer¶." 8.18. Pprint - Data Pretty Printer — Python 2.7.13 Documentation. N.p., n.d. Web. 23 June 2017. <https://docs.python.org/2/library/pprint.html>.
 Adam-p. "Adam-p/markdown-here." GitHub. N.p., n.d. Web. 22 June 2017. <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>.
 "Append vs. Extend." Python - Append vs. Extend - Stack Overflow. N.p., n.d. Web. 22 June 2017. <https://stackoverflow.com/questions/252703/append-vs-extend>.
 "Beautiful Soup Documentation¶." Beautiful Soup Documentation — Beautiful Soup 4.4.0 Documentation. N.p., n.d. Web. 22 June 2017. <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>.
+"BeautifulSoup: Find N-th Occurence of Element." Python - BeautifulSoup: Find N-th Occurence of Element - Stack Overflow. N.p., n.d. Web. 23 June 2017. <https://stackoverflow.com/questions/29581399/beautifulsoup-find-n-th-occurence-of-element>.
 "Exercise 46: A Project Skeleton." Learn Python the Hard Way. N.p., n.d. Web. 22 June 2017.
 "5. Data Structures¶." 5. Data Structures — Python 3.6.2rc1 Documentation. N.p., n.d. Web. 22 June 2017. <https://docs.python.org/3/tutorial/datastructures.html#dictionaries>.
 "Good Way to Append to a String." Python - Good Way to Append to a String - Stack Overflow. N.p., n.d. Web. 22 June 2017.
+"How Can I Make a Time Delay in Python?" Sleep - How Can I Make a Time Delay in Python? - Stack Overflow. N.p., n.d. Web. 23 June 2017. <https://stackoverflow.com/questions/510348/how-can-i-make-a-time-delay-in-python>.
+"How Do I Convert a Currency String to a Floating Point Number in Python?" Localization - How Do I Convert a Currency String to a Floating Point Number in Python? - Stack Overflow. N.p., n.d. Web. 23 June 2017. <https://stackoverflow.com/questions/8421922/how-do-i-convert-a-currency-string-to-a-floating-point-number-in-python>.
+"How to Get the Size of a List." Python - How to Get the Size of a List - Stack Overflow. N.p., n.d. Web. 23 June 2017. <https://stackoverflow.com/questions/1712227/how-to-get-the-size-of-a-list>.
 "How to Print a Dictionary Line by Line in Python?" Printing - How to Print a Dictionary Line by Line in Python? - Stack Overflow. N.p., n.d. Web. 22 June 2017. <https://stackoverflow.com/questions/15785719/how-to-print-a-dictionary-line-by-line-in-python>.
+"How to Shift a Block of Text to the Right/left in Sublime Text 2." Super User. N.p., n.d. Web. 23 June 2017. <https://superuser.com/questions/536768/how-to-shift-a-block-of-text-to-the-right-left-in-sublime-text-2>.
 "HowTo: Use Grep Command In Linux / UNIX – Examples." NixCraft. N.p., 03 May 2017. Web. 23 June 2017. <https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/>.
+"Ignore Files That Have Already Been Committed to a Git Repository." Version Control - Ignore Files That Have Already Been Committed to a Git Repository - Stack Overflow. N.p., n.d. Web. 23 June 2017. <https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository>.
 "Install MongoDB Community Edition on Ubuntu¶." Install MongoDB Community Edition on Ubuntu — MongoDB Manual 3.4. N.p., n.d. Web. 23 June 2017. <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/>.
+Nguyen, Dan. "Using BeautifulSoup to Parse HTML and Extract Press Briefings URLs." Computational Journalism, Spring 2016. N.p., n.d. Web. 23 June 2017. <http://www.compjour.org/warmups/govt-text-releases/intro-to-bs4-lxml-parsing-wh-press-briefings/>.
+"Parse String to Float or Int." Python - Parse String to Float or Int - Stack Overflow. N.p., n.d. Web. 23 June 2017. <https://stackoverflow.com/questions/379906/parse-string-to-float-or-int>.
+"Pythex: A Python Regular Expression Editor." Pythex: A Python Regular Expression Editor. N.p., n.d. Web. 23 June 2017. <http://pythex.org/>.
+"Python Coding Guidelines 12/14/07." Python Coding Guidelines. N.p., n.d. Web. 23 June 2017. <http://web.archive.org/web/20111010053227/http://jaynes.colorado.edu/PythonGuidelines.html#module_formatting>.
+"Raw Python Strings." RegexOne - Learn Regular Expressions - Python. N.p., n.d. Web. 23 June 2017. <https://regexone.com/references/python>.
 (TechnicalUser), Leegold2, Feherke (Programmer), and IPGuru (TechnicalUser). "Trying to Write Beautifulsoup Result to a File." Tek-Tips Information Technology Professional Forums. N.p., 13 Nov. 2011. Web. 22 June 2017.
 "Thread: How to Check System Specs?" Ubuntu Forums RSS. N.p., n.d. Web. 23 June 2017. <https://ubuntuforums.org/showthread.php?t=1478687>.
 Turkel, William J., and Adam Crymble. "Creating and Viewing HTML Files with Python." Programming Historian. N.p., 17 July 2012. Web. 22 June 2017.
+Tutorialspoint.com. "Python Functions." Www.tutorialspoint.com. N.p., n.d. Web. 23 June 2017. <https://www.tutorialspoint.com/python/python_functions.htm>.
 "Ubuntu — Show Version Number (Command Line and Unity)." HostingAdvice.com. N.p., 11 May 2016. Web. 23 June 2017. <http://www.hostingadvice.com/how-to/ubuntu-show-version/>.
+"What Is the Common Header Format of Python Files?" Stack Overflow. N.p., n.d. Web. 23 June 2017. <https://stackoverflow.com/questions/1523427/what-is-the-common-header-format-of-python-files>.
