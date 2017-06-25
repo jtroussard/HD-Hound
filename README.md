@@ -1,5 +1,5 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
-[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/TekkSparrow?lang=en)
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgoo.gl%2FRw2kZ2&text=Wanna%20known%20whens%20the%20best%20time%20to%20buy%20hard%20drive%20storage%3F%20Check%20out%20Hard%20Drive%20Hound%20&hashtags=python%2C%20webscraping%2C%20hdhound)
 [![Twitter Follow](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Follow)](https://twitter.com/TekkSparrow?lang=en)
 
 
