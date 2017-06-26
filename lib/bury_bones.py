@@ -48,18 +48,22 @@ def calc_gpmu(price, size):
 	gpmu = 0.0
 	if price:
 		p_value = float(sub(r'[^\d.]', '', price))
+		print(p_value)
 		s_factr = 0
 		if 'TB' in size:
 			s_factr = 1000
 		else:
 			s_factr = 1
-		s_value = int(sub(r'\D', '', size))
+		print(s_factr)
+		s_value = round(float(sub(r'[A-Z]', '', size)),1)
+		print (s_value)
 		gpmu = (s_value * s_factr)/p_value
-		# print ("gb per dollar:" + str(gpmu))
+		print ("gb per dollar:" + str(gpmu))
 	else:
 		price = -1
 		gpmu = -1
-	return gpmu
+		return gpmu
+
 
 def insert_doc(dt, brand, fid, name, price, link, size):
 	print('===MONGO-INSERTDOC===')
