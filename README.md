@@ -4,6 +4,9 @@
 
 
 # Hard Drive Hound (work in progress)
+## Announcements
+Project is temporarily on hold. I over looked the need to implement responsible metering mechanisms when making requests and ran into some trouble with the target sites administrator. I've been reading up on best practices and hope that the block will be removed soon. In the mean time I'll work on building a mock site to run my tests against.
+
 ## Description
 A web scraper written to send simple but detailed microcenter pricing data on internal hard drives. Overall goal is to develop this into a program which will run on a home server and deliver alerts on good hard drive prices. Storing the data will allow for comparison of prices, which can lead to a better understanding if a sale is in fact a sale. Additionally, working with the data to discover not obvious correlations.
 
@@ -27,6 +30,7 @@ I'm not entirely sure of all the tools that will be necessary for this project b
       * The system is triggered by user set rules    (ex: price point below $X.XX)
       * The system detects interesting data          (ex: ??? not sure yet exactly)
   4. Package project up into a simple to activate .exe
+  5. **IMPORTANT** Need to design some metering mechanisms and take a look at the robot.txt
   
 ## Future features
   1. Add more categories and allow for filters
@@ -52,3 +56,6 @@ I'm not entirely sure of all the tools that will be necessary for this project b
         * reworked insert to include document updating
         * created mech. for price history
     2. tested database functions
+  * Mon Jun 26 10:34AM
+    1. ran scraper this morning and got 503 error
+    2. announce project hold
