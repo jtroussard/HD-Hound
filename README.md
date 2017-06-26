@@ -21,11 +21,11 @@ I'm not entirely sure of all the tools that will be necessary for this project b
   2. Clean and load data into a mongo db
   3. Load project on home server
   4. Automate program to run at certain intervals (Daily? Weekly?)
-    * I'm thinking this can be part of another sub analysis to determine what is the more optial setting for this automation
+      * I'm thinking this can be part of another sub analysis to determine what is the more optial setting for this automation
   3. Run analysis, and send alert when either;
-    * The system detects possible erronous data    ex: 1,000 GB per dollar)
-    * The system is triggered by user set rules    ex: price point below $X.XX)
-    * The system detects interesting data          ex: ??? not sure yet exactly
+      * The system detects possible erronous data    ex: 1,000 GB per dollar)
+      * The system is triggered by user set rules    ex: price point below $X.XX)
+      * The system detects interesting data          ex: ??? not sure yet exactly
   4. Package project up into a simple to activate .exe
   
 ## Future features
