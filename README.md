@@ -5,7 +5,7 @@
 
 # Hard Drive Hound (work in progress)
 ## Announcements
-06/27/17 - Things are looking better. After checking my access to Microcenter website this morning, I received a different error page and started to dig a little more. Turns out mircocenters entire system is exerpeiencing a glitch, phonelines, website and even their POS systems are having issues. There are reports of agents having to conduct sales by hand and giving out old school hand written receipts! Looks like this project might need to be reworked when the site comes back up (updates?) but I have decided I really want to incorperate best practices into my scraper.
+06/27/17 - Things are looking better. After checking my access to Microcenter website this morning, I received a different error page and started to dig a little more. Turns out mircocenters entire system is exerpeiencing a glitch, phonelines, website and even their POS systems are having issues. There are reports of agents having to conduct sales by hand and giving out old school hand written receipts! Looks like this project might need to be reworked when the site comes back up (updates?) but I have decided I really want to incorporate best practices into my scraper.
 <p align="center">
 <a href="http://imgur.com/BrqbMDC"><img src="http://i.imgur.com/BrqbMDC.png?1" title="source: imgur.com" /></a>
 </p><br>
