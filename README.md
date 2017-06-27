@@ -7,13 +7,15 @@
 ## Announcements
 06/27/17 - Things are looking better. After checking my access to Microcenter website this morning, I received a different error page and started to dig a little more. Turns out mircocenters entire system is exerpeiencing a glitch, phonelines, website and even their POS systems are having issues. There are reports of agents having to conduct sales by hand and giving out old school hand written receipts! Looks like this project might need to be reworked when the site comes back up (updates?) but I have decided I really want to incorperate best practices into my scraper.
 <p align="center">
-<a href="http://imgur.com/rguId1M"><img src="http://i.imgur.com/rguId1M.jpg?1" title="source: imgur.com" /></a>
-</p><br>
 <a href="http://imgur.com/BrqbMDC"><img src="http://i.imgur.com/BrqbMDC.png?1" title="source: imgur.com" /></a>
 </p><br>
 </center>
 
 06/26/17 - Project is temporarily on hold. I over looked the need to implement responsible metering mechanisms when making requests and ran into some trouble with the target sites administrator. I've been reading up on best practices and hope that the block will be removed soon. In the mean time I'll work on building a mock site to run my tests against.
+<p align="center">
+<a href="http://imgur.com/rguId1M"><img src="http://i.imgur.com/rguId1M.jpg?1" title="source: imgur.com" /></a>
+</p><br>
+</center>
 
 ## Description
 A web scraper written to send simple but detailed microcenter pricing data on internal hard drives. Overall goal is to develop this into a program which will run on a home server and deliver alerts on good hard drive prices. Storing the data will allow for comparison of prices, which can lead to a better understanding if a sale is in fact a sale. Additionally, working with the data to discover not obvious correlations.
