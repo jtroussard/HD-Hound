@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 __author__     = "Jacques Troussard"
-__copyright__  = ""
+__copyright__  = "Copyright 2017, TekkSparrows"
 __date__       = "Fri Aug 03 2017"
 __version__    = "0.0.1"
 __maintainer__ = "Jacques Troussard"
