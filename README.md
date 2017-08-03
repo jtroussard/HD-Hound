@@ -84,3 +84,7 @@ I'm not entirely sure of all the tools that will be necessary for this project b
     1. fixed history appending function
     2. fixed certain bugs related to 'no price found' situations
     3. updated some comments
+  * Thu Aug 03 07:28PM:
+    1. created module to facilitate emailing alerts and tested
+    2. updated some copyright information on each file
+    3. refactored modules from mutiple words to a single word
