@@ -5,7 +5,7 @@
 
 # Hard Drive Hound (work in progress)
 ## Announcements
-08/03/17 - After a long hiatus from this project I decided to jump back into it (12 credit summer session will do some interesting things to your schedules.) Some housing cleaning comments, my program did not cause a ip ban, in fact Microcenter had a company wide blackout and for a few days much of their communication infrastructure was down, including their website. Now that it is back up an running it seems that there have been no changes to the website which would cause any issues with the web scraping set up I currently have set up. In the meantime I have read up on how to more responsibly web scrape and have taking a look at their robots.txt file which has returned this
+08/03/17 - After a long hiatus from this project I decided to jump back into it (12 credit summer session will do some interesting things to your schedules.) Some housing cleaning comments, my program did not cause a ip ban, in fact Microcenter had a company wide blackout and for a few days much of their communication infrastructure was down, including their website. Now that it is back up an running it seems that there have been no changes to the website which would cause any issues with the web scraping set up. Secondly during my time away I have read up on how to more responsibly web scrape and have taking a look at their robots.txt file which has returned this
 ```
 User-agent: discobot
 Disallow: /
