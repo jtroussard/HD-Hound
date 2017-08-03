@@ -5,6 +5,8 @@
 
 # Hard Drive Hound (work in progress)
 ## Announcements
+08/03/17 - After a long hiatues from this project I decided to jump back into it (12 credit summer session will do some interesting things to your schedules.) Some housing cleaning comments, my program did *not* cause a ip ban, in fact Microcenter had a company wide blackout and for a few days much of their communication infrastructure was down, including their website. 
+
 06/27/17 - Things are looking better. After checking my access to Microcenter website this morning, I received a different error page and started to dig a little more. Turns out mircocenters entire system is exerpeiencing a glitch, phonelines, website and even their POS systems are having issues. There are reports of agents having to conduct sales by hand and giving out old school hand written receipts! Looks like this project might need to be reworked when the site comes back up (updates?) but I have decided I really want to incorporate best practices into my scraper.
 <p align="center">
 <a href="http://imgur.com/BrqbMDC"><img src="http://i.imgur.com/BrqbMDC.png?1" title="source: imgur.com" /></a>
@@ -40,7 +42,7 @@ I'm not entirely sure of all the tools that will be necessary for this project b
       * The system is triggered by user set rules    (ex: price point below $X.XX)
       * The system detects interesting data          (ex: ??? not sure yet exactly)
   4. Package project up into a simple to activate .exe
-  5. **IMPORTANT** Need to design some metering mechanisms and take a look at the robot.txt
+  5. ~~**IMPORTANT** Need to design some metering mechanisms and take a look at the robot.txt~~
   
 ## Future features
   1. Add more categories and allow for filters
@@ -52,20 +54,24 @@ I'm not entirely sure of all the tools that will be necessary for this project b
     1. create html file from url request
     2. parce individual products into list object
     3. further parce product details into dict objects
-  * Fri Jun 23 7:42PM:  
+  * Fri Jun 23 07:42PM:  
     1. fixed redundant appending of items
     2. attached mongo database
     3. wrote db functions
     4. completed db tests
-  * Sat Jun 24 6:12PM:
+  * Sat Jun 24 06:12PM:
     1. fix bugs found during first tests
-  * Sun Jun 25 9:04PM:
+  * Sun Jun 25 09:04PM:
     1. completely recoded database functions
         * hard coded db access
         * separated price per gb function
         * reworked insert to include document updating
         * created mech. for price history
     2. tested database functions
-  * Mon Jun 26 10:34AM
+  * Mon Jun 26 10:34AM:
     1. ran scraper this morning and got 503 error
     2. announce project hold
+  * Thu Aug 03 03:53PM:
+    1. fixed history appending function
+    2. fixed certain bugs related to 'no price found' situations
+    3. updated some comments
