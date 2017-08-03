@@ -157,7 +157,7 @@ def loadItems(number_of_pages):
 	for link in links_used:
 		print (link + "\n")
 	print ("length of list, hd_results: " + str(len(hd_results)))
-	time.sleep(3) # as per robots.txt web crawl delay
+	time.sleep(30) # as per robots.txt web crawl delay
 
 	return hd_results
 
