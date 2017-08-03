@@ -1,14 +1,10 @@
-
 #!/usr/bin/env python
 
-import datetime
-import pymongo
-from lib import sniff
-from lib import bury
+import smtplib
+from lib.testconfig import *
 from lib import point
-from lib import bark
 
-"""Provides configuration information necessary to authenticate email.
+"""Provides functions necessary to transmit content via email.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,23 +28,29 @@ __maintainer__ = "Jacques Troussard"
 __email__      = "tekksparrows@gmail.com"
 __status__     = "development"
 
-# testing flag
-test = True
 
-# record datetime information
-now = datetime.datetime.now()
+def bark():
+	# do stuff with point module to create email content
 
-string = sniff.findBones(0) # builds url for request
+	# content which goes into the email
+	content = "point module results go in here"
 
-soup = sniff.makeSoup(string) # make initial soup
-pages = sniff.getPageValue(soup) # determine how many pages search query returned
+	# params (mail server:port) **ports may change** 465 is alternate?
+	mail = smtplib.SMTP(SERVER, PORT)
 
-results = sniff.loadItems(pages) # parse data into results var for loading into db
+	# id yourself to the server (ehlo/hello)
+	mail.ehlo()
 
-# load items into db
-for item in results:
-	bury.insert_doc(item['dateScrapped'], item['brand'], item['id'], item['name'], item['price'], item['link'], item['hdSize'])
+	# start tls (transport layer security) make sure login information is encrpyted
+	mail.starttls()
 
-# if price point met send email
-if test:
-	bark.bark()
+	# login to mail account
+	mail.login(SNDR_EMAIL, SNDR_PASSW)
+
+	# send email - fromemail should be email from login function
+	# to spoof modify fromemail - consider this is an easy wasy to have mail sent
+	# to the spam folder of rec. account
+	mail.sendmail(FROM_EMAIL, RECE_EMAIL, content)
+
+	# close connection
+	mail.close()

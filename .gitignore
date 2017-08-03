@@ -2,3 +2,6 @@
 demo.*
 *.pyc
 __pycache__/
+
+# ignore test files
+testconfig.py
