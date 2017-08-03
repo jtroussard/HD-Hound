@@ -5,7 +5,7 @@
 
 # Hard Drive Hound (work in progress)
 ## Announcements
-08/03/17 - After a long hiatus from this project I decided to jump back into it (12 credit summer session will do some interesting things to your schedules.) Some housing cleaning comments, my program did not cause a ip ban, in fact Microcenter had a company wide blackout and for a few days much of their communication infrastructure was down, including their website. Now that it is back up an running it seems that there have been no changes to the website which would cause any issues with the web scraping set up. Secondly during my time away I have read up on how to more responsibly web scrape and have taking a look at their robots.txt file which has returned this
+08/03/17 - After a long hiatus from this project I decided to jump back into it (12 credit summer session will do some interesting things to your schedules.) Some housing cleaning comments, my program did not cause a ip ban, in fact Microcenter had a company wide blackout and for a few days much of their communication infrastructure was down, including their website. Now that it is back up an running it seems that there have been no changes to the website which would cause any issues with the web scraping set up. Secondly during my time away I have read up on how to more responsibly scrape the web and have taken a look at Microcenter's website's robots.txt file which has returned this
 ```
 User-agent: discobot
 Disallow: /
@@ -14,7 +14,7 @@ User-agent: *
 Disallow:
 Crawl-delay: 30
 ```
-Eventually I hope to have this running on a homebrew server which executes once a week or something, so adding a 30 second delay between page loads doesn't seem that problematic. If you're cloning this repo and are testing/developing with smaller requests you can find the line [setting the loading time HERE.](https://github.com/jtroussard/HD-Hound/blob/master/lib/hound_tools.py#L160) Now that the most of the mechanics of scraping and storing the data are finished the next few sessions of coding will be focused on the automation and alerting mechanisms.
+Eventually I hope to have this programing running on a homebrew server which executes once a week or something, so adding a 30 second delay between page loads doesn't seem that problematic. If you're cloning this repo and are testing/developing with smaller requests you can find/modify the line [which meters the loading time HERE.](https://github.com/jtroussard/HD-Hound/blob/master/lib/hound_tools.py#L160) Now that the most of the mechanics of scraping and storing the data are finished the next few sessions of coding will be focused on the automation and alerting mechanisms.
 
 06/27/17 - Things are looking better. After checking my access to Microcenter website this morning, I received a different error page and started to dig a little more. Turns out mircocenters entire system is exerpeiencing a glitch, phonelines, website and even their POS systems are having issues. There are reports of agents having to conduct sales by hand and giving out old school hand written receipts! Looks like this project might need to be reworked when the site comes back up (updates?) but I have decided I really want to incorporate best practices into my scraper.
 <p align="center">
