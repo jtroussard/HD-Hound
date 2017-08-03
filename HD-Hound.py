@@ -8,12 +8,12 @@ from lib import bury_bones as bb
 now = datetime.datetime.now()
 pp = pprint.PrettyPrinter(indent=4)
 
-string = ht.findBones(0)
+string = ht.findBones(0) # builds url for request
 
-soup = ht.makeSoup(string)
-pages = ht.getPageValue(soup)
+soup = ht.makeSoup(string) # make initial soup
+pages = ht.getPageValue(soup) # determine how many pages search query returned
 
-results = ht.loadItems(pages)
+results = ht.loadItems(pages) # parse data into results var for loading into db
 
 # # test print results
 pp.pprint(results)
