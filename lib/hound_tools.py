@@ -129,6 +129,7 @@ def loadItems(number_of_pages):
 			# but in newer version I want to dig deeper and pull the data from
 			# the actual item page.
 			item_storage_size = ""
+			# regex to handle non-whole numbers regarding hd storage size
 			p = re.search(re.compile('[0-9]+\.*[0-9]*((TB)|(GB))'), entry["name"])
 			if p.group():
 				item_storage_size = p.group(0)
@@ -156,7 +157,7 @@ def loadItems(number_of_pages):
 	for link in links_used:
 		print (link + "\n")
 	print ("length of list, hd_results: " + str(len(hd_results)))
-	time.sleep(3)
+	time.sleep(3) # as per robots.txt web crawl delay
 
 	return hd_results
 
