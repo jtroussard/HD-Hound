@@ -43,18 +43,16 @@ def bark():
 	# id yourself to the server (ehlo/hello)
 	mail.ehlo()
 
-	# start tls (transport layer security) make sure login information is encrpyted
+	# start tls
 	mail.starttls()
 
-	# as per 
+	# as per documention call ehlo again after tls
 	mail.ehlo()
 
 	# login to mail account
 	mail.login(SNDR_EMAIL, SNDR_PASSW)
 
-	# send email - fromemail should be email from login function
-	# to spoof modify fromemail - consider this is an easy wasy to have mail sent
-	# to the spam folder of rec. account
+	# send email
 	mail.sendmail(FROM_EMAIL, RECE_EMAIL, email_msg)
 
 	# close connection
