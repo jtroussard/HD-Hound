@@ -33,7 +33,9 @@ def bark():
 	# do stuff with point module to create email content
 
 	# content which goes into the email
+	subject = "subject of the email"
 	content = "point module results go in here"
+	email_msg = "Subject: {} \n\n{}".format(subject, content)
 
 	# params (mail server:port) **ports may change** 465 is alternate?
 	mail = smtplib.SMTP(SERVER, PORT)
@@ -44,13 +46,16 @@ def bark():
 	# start tls (transport layer security) make sure login information is encrpyted
 	mail.starttls()
 
+	# as per 
+	mail.ehlo()
+
 	# login to mail account
 	mail.login(SNDR_EMAIL, SNDR_PASSW)
 
 	# send email - fromemail should be email from login function
 	# to spoof modify fromemail - consider this is an easy wasy to have mail sent
 	# to the spam folder of rec. account
-	mail.sendmail(FROM_EMAIL, RECE_EMAIL, content)
+	mail.sendmail(FROM_EMAIL, RECE_EMAIL, email_msg)
 
 	# close connection
 	mail.close()
