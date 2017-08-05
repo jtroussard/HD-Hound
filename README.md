@@ -46,9 +46,9 @@ I'm not entirely sure of all the tools that will be necessary for this project b
   3. ~~Load project on home server~~
   4. Automate program to run at certain intervals (Daily? Weekly?)
       * I'm thinking this can be part of another function which determines the optimal interveal to be run
-  3. Run analysis, and send alert when either;
+  3. ~~Run analysis, and send alert when either;
       * The system detects possible erroneous data   (ex: 1,000 GB per dollar)
-      * The system is triggered by user set rules    (ex: price point below $X.XX)
+      * The system is triggered by rules             (ex: price point below $X.XX)~~
       * The system detects interesting data          (ex: ??? not sure yet exactly)
   4. Package project up into a simple to activate .exe
   5. ~~**IMPORTANT** Need to design some metering mechanisms and take a look at the robot.txt~~
@@ -88,3 +88,5 @@ I'm not entirely sure of all the tools that will be necessary for this project b
     1. created module to facilitate emailing alerts and tested
     2. updated some copyright information on each file
     3. refactored modules from mutiple words to a single word
+  * Fri Aug 04 08:51PM:
+    1. added point and bark modules which prep content for sending and emails content
