@@ -5,3 +5,9 @@ __pycache__/
 
 # ignore test files
 testconfig.py
+tests/
+tests/*
+
+# ignore old files
+lib/old/
+lib/old/*

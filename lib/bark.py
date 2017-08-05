@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 import smtplib
+
 from lib.testconfig import *
 from lib import point
 
@@ -31,29 +32,39 @@ __status__     = "development"
 
 def bark():
 	# do stuff with point module to create email content
-
 	# content which goes into the email
-	subject = "subject of the email"
-	content = "point module results go in here"
-	email_msg = "Subject: {} \n\n{}".format(subject, content)
+	content = point.createContent()
+	from_head = "From: Hard Drive Hound <{}>\n".format(FROM_EMAIL)
+	rece_head = "To: {} <{}>\n".format(RECE_EMAIL,RECE_EMAIL)
+	subj_head = "Subject: Hard Drive Hound has found something interesting!\n\n"
 
-	# params (mail server:port) **ports may change** 465 is alternate?
-	mail = smtplib.SMTP(SERVER, PORT)
+	email_msg = from_head + rece_head + subj_head + content
+	debuglevel = True
 
-	# id yourself to the server (ehlo/hello)
-	mail.ehlo()
+	try:
+		# params (mail server:port) **ports may change** 465 is alternate?
+		mail = smtplib.SMTP(SERVER, PORT)
+		mail.set_debuglevel(debuglevel)
 
-	# start tls
-	mail.starttls()
+		# id yourself to the server (ehlo/hello)
+		mail.ehlo()
 
-	# as per documention call ehlo again after tls
-	mail.ehlo()
+		# start tls
+		mail.starttls()
 
-	# login to mail account
-	mail.login(SNDR_EMAIL, SNDR_PASSW)
+		# as per documention call ehlo again after tls
+		mail.ehlo()
 
-	# send email
-	mail.sendmail(FROM_EMAIL, RECE_EMAIL, email_msg)
+		# login to mail account
+		mail.login(SNDR_EMAIL, SNDR_PASSW)
 
-	# close connection
-	mail.close()
+		# send email
+		mail.sendmail(FROM_EMAIL, RECE_EMAIL, email_msg)
+
+		# close connection
+		mail.quit()
+	except Exception as e:
+		print(type(e))
+		print(e)
+		print ("Error sending mail")
+		return None

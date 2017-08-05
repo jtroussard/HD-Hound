@@ -32,9 +32,6 @@ __maintainer__ = "Jacques Troussard"
 __email__      = "tekksparrows@gmail.com"
 __status__     = "development"
 
-# testing flag
-test = True
-
 # record datetime information
 now = datetime.datetime.now()
 
@@ -49,6 +46,8 @@ results = sniff.loadItems(pages) # parse data into results var for loading into 
 for item in results:
 	bury.insert_doc(item['dateScrapped'], item['brand'], item['id'], item['name'], item['price'], item['link'], item['hdSize'])
 
-# if price point met send email
-if test:
+# if hound found something, send email
+if point.valueTrigger() > 0 and not point.priceErrorTrigger() > 0:
 	bark.bark()
+else:
+	print("HD hound didn't find anything interesting")

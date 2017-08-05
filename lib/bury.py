@@ -37,8 +37,8 @@ __email__      = "tekksparrows@gmail.com"
 __status__     = "development"
 
 # for now I am hard coding the db and collection, up to this point there is 
-# very little functionality in this scrapper. once this first iteration is done
-# this will be modified to allow for more control
+# very little functionality in this scrapper. I realize that db access should
+# be separate from business logic now but I guess too late for that now.
 def ConnectToMongo():
 	try:
 		client = MongoClient()
@@ -144,3 +144,4 @@ def insert_doc(dt, brand, fid, name, price, link, size):
 	# debug check doc for changes, reload doc variable to make comparision via console
 	# doc = collection.find_one( { 'foreign_id_number': fid, 'brand': brand, 'link': link } )
 	# pp.pprint(doc)
+

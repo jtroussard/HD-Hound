@@ -29,5 +29,5 @@ SNDR_PASSW = "sender-password"
 FROM_EMAIL = "from-email@fake-email.com"
 RECE_EMAIL = "to-email@fake-email.com"
 
-SERVER = "smtp.gmail.com"
+SERVER = "mail.gmx.com"
 PORT = 587
