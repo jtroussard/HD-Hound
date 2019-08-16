@@ -1,0 +1,42 @@
+[{
+    "filter codes": {
+        "AVERAGE RATING": {
+            "4 Stars and Up": 522,
+            "3 Stars and Up": 523,
+            "2 Stars and Up": 524,
+            "1 Stars and Up": 525
+        },
+        "BRAND":{
+            "Seagate": 4294821130,
+            "WD": 4294820870,
+            "Toshiba": 4294819693,
+            "Hitachi": null,
+            "Western Digital": 4294820870
+        },
+        "PRICE": {
+            "$25 to $50": 36,
+            "$50 to $75": 37,
+            "$75 to $100": 38,
+            "$100 to $200": 39,
+            "$200 to $300": 40,
+            "$300 to $400": 41,
+            "$400 to $500": 42
+        },
+        "TYPE": {
+            "Desktop": 4294821125,
+            "Hybrid Drive": 4294815198,
+            "Network Attached Storage": 4294818838,
+            "NAS": 4294818838,
+            "Notebook": 4294821356
+        },
+        "PACKAGING": {
+            "Bulk": 4294820869,
+            "OEM": 4294819567,
+            "Retail": 4294821501
+        },
+        "FORM FACTOR": {
+            "2.5\"": 4294820270,
+            "3.5\"": 4294821129
+        }
+    }
+}]
